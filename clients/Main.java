@@ -56,7 +56,7 @@ class Main
 		frame.setVisible(true);
 		JButton button = new JButton("Customer");
 		button.setBounds(17, 25+60*0, 120, 40);
-		button.setBackground(Color.ORANGE);
+		button.setBackground(Color.red);
 		frame.getContentPane().add(button);
 		button.addActionListener((ActionListener) new ActionListener() {
 
@@ -69,7 +69,7 @@ class Main
 		
 		JButton button1 = new JButton("Cashier");
 		button1.setBounds(150, 25+60*0, 120, 40);
-		button1.setBackground(Color.GREEN);
+		button1.setBackground(Color.red);
 		frame.getContentPane().add(button1);
 		button1.addActionListener((ActionListener) new ActionListener() {
 
@@ -81,7 +81,7 @@ class Main
 		});
 		JButton button2 = new JButton("BackDoor");
 		button2.setBounds(17, 25+60*1, 120, 40);
-		button2.setBackground(Color.CYAN);
+		button2.setBackground(Color.red);
 		frame.getContentPane().add(button2);
 		button2.addActionListener((ActionListener) new ActionListener() {
 
@@ -93,7 +93,7 @@ class Main
 		});
 		JButton button3 = new JButton("Pickup");
 		button3.setBounds(150, 25+60*1, 120, 40);
-		button3.setBackground(Color.YELLOW);
+		button3.setBackground(Color.red);
 		frame.getContentPane().add(button3);
 		button3.addActionListener((ActionListener) new ActionListener() {
 
@@ -117,7 +117,7 @@ class Main
 		});
 		JButton button5 = new JButton("Collection");
 		button5.setBounds(150, 25+60*2, 120, 40);
-		button5.setBackground(Color.MAGENTA);
+		button5.setBackground(Color.red);
 		frame.getContentPane().add(button5);
 		button5.addActionListener((ActionListener) new ActionListener() {
 
