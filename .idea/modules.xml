@@ -5,4 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/OOP UPDATED.iml" filepath="$PROJECT_DIR$/OOP UPDATED.iml" />
     </modules>
   </component>
+
+  <build>
+    <finalName>docker-jenkins-integration</finalName>
+  </build>
+
 </project>

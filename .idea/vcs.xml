@@ -3,4 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
+
+  <build>
+    <finalName>docker-jenkins-integration</finalName>
+  </build>
+
 </project>
