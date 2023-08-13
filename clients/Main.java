@@ -20,10 +20,14 @@ import clients.warehousePick.PickView;
 import middle.LocalMiddleFactory;
 import middle.MiddleFactory;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 
 /**
@@ -37,7 +41,7 @@ class Main
   // Change to false to reduce the number of duplicated clients
 
   private final static boolean many = false;        // Many clients? (Or minimal clients)
-  private JButton button;
+  private static JButton button;
   private JButton button1;
   private JButton button2;
   private JButton button3;
@@ -46,15 +50,20 @@ class Main
 
   public static void main (String args[])
   {
-	  MiddleFactory mlf = new LocalMiddleFactory();
+      startPlayMusic(); // Add this line to start playing music
+
+      MiddleFactory mlf = new LocalMiddleFactory();
 	  JFrame frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(new Point(10, 50));		    
 		frame.setSize(new Dimension(300, 300));
 		frame.setTitle("Client Main Window");
+
+
 		frame.setVisible(true);
-		JButton button = new JButton("Customer");
+
+      JButton button = new JButton("Customer");
 		button.setBounds(17, 25+60*0, 120, 40);
 		button.setBackground(Color.red);
 		frame.getContentPane().add(button);
@@ -64,9 +73,12 @@ class Main
 		    public void actionPerformed(ActionEvent e) 
 		    {
 		        new Main().startCustomerGUI_MVC( mlf );
-			}
+
+
+            }
 		});
-		
+
+
 		JButton button1 = new JButton("Cashier");
 		button1.setBounds(150, 25+60*0, 120, 40);
 		button1.setBackground(Color.red);
@@ -153,7 +165,7 @@ class Main
     startCollectionGUI_MVC( mlf );
   }
   
-  public void startCustomerGUI_MVC(MiddleFactory mlf )
+  public static void startCustomerGUI_MVC(MiddleFactory mlf)
   {
     JFrame  window = new JFrame();
     window.setTitle( "Customer Client MVC");
@@ -168,6 +180,24 @@ class Main
     model.addObserver( view );       // Add observer to the model
     window.setVisible(true);         // start Screen
   }
+
+    private static void startPlayMusic() {
+
+
+        try {
+            File musicPath = new File("images/music.wav"); // Sets filepath for ambience
+            if (musicPath.exists()) {                                                      // Checks if filepath is valid
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);   // Creates input stream
+                Clip Ambience = AudioSystem.getClip();
+                Ambience.loop(Clip.LOOP_CONTINUOUSLY);    // sets clip to loop forever
+                Ambience.open(audioInput);                // opens clip
+                Ambience.start();                         // starts clip
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Ambience failed to load"); // displays error message if and errors occur in method
+        }
+    }
 
   /**
    * start the cashier client
