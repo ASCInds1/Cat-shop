@@ -4,6 +4,7 @@ import middle.MiddleFactory;
 import middle.StockReadWriter;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -35,11 +36,8 @@ public class BackDoorView implements Observer
   private StockReadWriter theStock     = null;
   private BackDoorController cont= null;
 
-  private static final Color BUTTON_COLOR = new Color(0, 102, 204); // Dark Blue
   private static final Color BUTTON_TEXT_COLOR = Color.WHITE;
-  private static final Color MESSAGE_AREA_COLOR = new Color(34, 49, 63); // Dark Blue-Grey
   private static final Color MESSAGE_TEXT_COLOR = Color.WHITE;
-  private static final Color INPUT_AREA_COLOR = new Color(149, 165, 166); // Light Grey
 
   /**
    * Construct the view
@@ -57,6 +55,8 @@ public class BackDoorView implements Observer
     {
       System.out.println("Exception: " + e.getMessage() );
     }
+
+    Border thickBlackBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
     cp.setLayout(null);                             // No layout manager
@@ -65,26 +65,48 @@ public class BackDoorView implements Observer
     
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
-    theBtQuery.setBounds( 16, 25+60*0, 80, 40 );    // Buy button 
+    theBtQuery.setBorder(thickBlackBorder);
+    theInput.setBorder(thickBlackBorder);
+     theBtClear.setBorder(thickBlackBorder);
+    theBtQuery.setBorder(thickBlackBorder);
+    theBtRStock.setBorder(thickBlackBorder);
+
+
+    theAction.setBorder(thickBlackBorder);
+    theInput.setBorder(thickBlackBorder);
+    theSP.setBorder(thickBlackBorder);
+
+    theBtQuery.setBounds( 16, 25+60*0, 80, 40 );    // Buy button
+    theBtQuery.setBackground(Color.BLACK); // Set background color to black
+    theBtQuery.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtQuery.setForeground(Color.WHITE); // Set text color to white
     theBtQuery.addActionListener(                   // Call back code
       e -> cont.doQuery( theInput.getText() ) );
     cp.add( theBtQuery );                           //  Add to canvas
 
     theBtRStock.setBounds( 16, 25+60*1, 80, 40 );   // Check Button
+    theBtRStock.setBackground(Color.BLACK); // Set background color to black
+    theBtRStock.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtRStock.setForeground(Color.WHITE); // Set text color to white
     theBtRStock.addActionListener(                  // Call back code
       e -> cont.doRStock( theInput.getText(),
                           theInputNo.getText() ) );
     cp.add( theBtRStock );                          //  Add to canvas
 
-    theBtClear.setBounds( 16, 25+60*2, 80, 40 );    // Buy button 
+    theBtClear.setBounds( 16, 25+60*2, 80, 40 );    // Buy button
+    theBtClear.setBackground(Color.BLACK); // Set background color to black
+    theBtClear.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtClear.setForeground(Color.WHITE); // Set text color to white
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
 
- 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-    theAction.setText( "" );                        // Blank
-    cp.add( theAction );                            //  Add to canvas
+    theAction.setBackground(Color.BLACK); // Set background color to black
+    theAction.setForeground(Color.WHITE); // Set text color to white
+    theAction.setOpaque(true); // Ensure the background color is visible
+    cp.add(theAction); //  Add to canvas
+
 
     theInput.setBounds( 110, 50, 120, 40 );         // Input Area
     theInput.setText("");                           // Blank
@@ -102,9 +124,6 @@ public class BackDoorView implements Observer
     rootWindow.setVisible( true );                  // Make visible
     theInput.requestFocus();                        // Focus is here
 
-    theBtQuery.setBackground(Color.BLUE);
-    theBtRStock.setBackground(Color.GREEN);
-    theBtClear.setBackground(Color.RED);
 
     // Setting text color for buttons
     theBtQuery.setForeground(Color.WHITE);
@@ -125,33 +144,13 @@ public class BackDoorView implements Observer
 
     // ... (remaining code)
 
-    initializeComponents(rpc, mf, x, y);
-    configureUIStyling(); // Apply the cool UI styling
+
 
 
 
   }
 
   private void initializeComponents(RootPaneContainer rpc, MiddleFactory mf, int x, int y) {
-  }
-
-  private void configureUIStyling() {
-    theBtQuery.setBackground(BUTTON_COLOR);
-    theBtRStock.setBackground(BUTTON_COLOR);
-    theBtClear.setBackground(BUTTON_COLOR);
-
-    theBtQuery.setForeground(BUTTON_TEXT_COLOR);
-    theBtRStock.setForeground(BUTTON_TEXT_COLOR);
-    theBtClear.setForeground(BUTTON_TEXT_COLOR);
-
-    theAction.setOpaque(true);
-    theAction.setBackground(MESSAGE_AREA_COLOR);
-    theAction.setForeground(MESSAGE_TEXT_COLOR);
-
-    theInput.setBackground(INPUT_AREA_COLOR);
-    theInputNo.setBackground(INPUT_AREA_COLOR);
-
-    // ... (other color and styling configurations)
   }
 
 

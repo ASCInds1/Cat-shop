@@ -4,6 +4,7 @@ import middle.MiddleFactory;
 import middle.OrderProcessing;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -52,16 +53,31 @@ public class CollectView implements Observer
     rootWindow.setSize( W, H );                     // Size of Window
     rootWindow.setLocation( x, y );
 
-    Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
+      Border thickBlackBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
+
+
+      Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
+
+      theBtCollect.setBorder(thickBlackBorder);
+      theAction.setBorder(thickBlackBorder);
+      theInput.setBorder(thickBlackBorder);
+      theSP.setBorder(thickBlackBorder);
 
     theBtCollect.setBounds( 16, 25+60*0, 80, 40 );  // Check Button
+      theBtCollect.setBackground(Color.BLACK); // Set background color to black
+      theBtCollect.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+      theBtCollect.setForeground(Color.WHITE); // Set text color to white
     theBtCollect.addActionListener(                 // Call back code
       e -> cont.doCollect( theInput.getText()) );
     cp.add( theBtCollect );                         //  Add to canvas
 
-    theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-    theAction.setText( "" );                        // Blank
-    cp.add( theAction );                            //  Add to canvas
+      theAction.setBounds( 110, 25 , 270, 20 );// Message area
+      theAction.setBackground(Color.BLACK); // Set background color to black
+      theAction.setForeground(Color.WHITE); // Set text color to white
+      theAction.setOpaque(true); // Ensure the background color is visible
+      theAction.setText( "Please Enter Collect" );                        //  Blank
+      cp.add( theAction );                            //  Add to canvas
+      //  Add to canvas
 
     theInput.setBounds( 110, 50, 270, 40 );         // Input Area
     theInput.setText("");                           // Blank

@@ -1,6 +1,7 @@
 package clients;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
@@ -66,5 +67,9 @@ public class Picture extends Canvas
     {
       g.drawImage(thePicture, 0, 0, null);
     }
+  }
+
+  public void setBorder(Border pictureBorder) {
+    setSize( width, height );
   }
 }

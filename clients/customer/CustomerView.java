@@ -7,9 +7,12 @@ import middle.MiddleFactory;
 import middle.StockReader;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.BorderFactory;
 
 /**
  * Implements the Customer view.
@@ -56,6 +59,9 @@ public class CustomerView implements Observer
     {
       System.out.println("Exception: " + e.getMessage() );
     }
+
+    Border thickBlackBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
+
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
     cp.setLayout(null);                             // No layout manager
@@ -64,17 +70,34 @@ public class CustomerView implements Observer
 
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
+    theBtCheck.setBorder(thickBlackBorder);
+    theInput.setBorder(thickBlackBorder);
+    thePicture.setBorder(thickBlackBorder);
+    theAction.setBorder(thickBlackBorder);
+    theInput.setBorder(thickBlackBorder);
+    theSP.setBorder(thickBlackBorder);
+
+
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check button
+    theBtCheck.setBackground(Color.BLACK); // Set background color to black
+    theBtCheck.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtCheck.setForeground(Color.WHITE); // Set text color to white
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText() ) );
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtClear.setBounds( 16, 25+60*1, 80, 40 );    // Clear button
+    theBtClear.setBackground(Color.BLACK); // Set background color to black
+    theBtClear.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtClear.setForeground(Color.WHITE); // Set text color to white
     theBtClear.addActionListener(                   // Call back code
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
 
-    theAction.setBounds( 110, 25 , 270, 20 );       // Message area
+    theAction.setBounds( 110, 25 , 270, 20 );// Message area
+    theAction.setBackground(Color.BLACK); // Set background color to black
+    theAction.setForeground(Color.WHITE); // Set text color to white
+    theAction.setOpaque(true); // Ensure the background color is visible
     theAction.setText( "" );                        //  Blank
     cp.add( theAction );                            //  Add to canvas
 
@@ -89,6 +112,8 @@ public class CustomerView implements Observer
     theSP.getViewport().add( theOutput );           //  In TextArea
 
     thePicture.setBounds( 16, 25+60*2, 80, 80 );   // Picture area
+    Border pictureBorder = BorderFactory.createLineBorder(Color.BLACK); // Create a black border
+    thePicture.setBorder(pictureBorder); // Set the border for the Picture area
     cp.add( thePicture );                           //  Add to canvas
     thePicture.clear();
     

@@ -37,15 +37,23 @@ public class DisplayView extends Canvas implements Observer
   
   public DisplayView(  RootPaneContainer rpc, MiddleFactory mf, int x, int y )
   {
-    Container cp         = rpc.getContentPane();    // Content Pane
-    Container rootWindow = (Container) rpc;         // Root Window
-    cp.setLayout( new BorderLayout() );             // Border N E S W CENTER 
-    rootWindow.setSize( W, H );                     // Size of Window  
-    rootWindow.setLocation( x, y );                 // Position on screen
-    rootWindow.add( this, BorderLayout.CENTER );    //  Add to rootwindow
-    
-    rootWindow.setVisible( true );                  // Make visible
+    Container cp = rpc.getContentPane();  // Content Pane
+    Container rootWindow = (Container) rpc;  // Root Window
+    cp.setLayout(new BorderLayout());  // Border N E S W CENTER
+
+    // Set background color to black
+    cp.setBackground(Color.BLACK);
+
+    rootWindow.setSize(W, H);  // Size of Window
+    rootWindow.setLocation(x, y);  // Position on screen
+    rootWindow.add(this, BorderLayout.CENTER);  // Add to rootwindow
+
+
+
+    rootWindow.setVisible(true);  // Make visible       // Make visible
   }
+
+
   
   
   public void setController( DisplayController c )
@@ -128,15 +136,15 @@ public class DisplayView extends Canvas implements Observer
  
   public void drawActualScreen( Graphics2D g )  // Re draw contents 
   {
-    g.setPaint( Color.white );            // Paint Colour 
+    g.setPaint( Color.black );            // Paint Colour
     W = getWidth(); H = getHeight();      // Current size
-    
+
     g.setFont( font );
     g.fill( new Rectangle2D.Double( 0, 0, W, H ) );
 
     // Draw state of system on display
     String lines[] = textToDisplay.split("\n");
-    g.setPaint( Color.black );
+    g.setPaint( Color.white);
     for ( int i=0; i<lines.length; i++ )
     {
       g.drawString( lines[i], 0, 50 + 50*i );

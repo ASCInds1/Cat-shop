@@ -159,6 +159,46 @@ public class CashierModel extends Observable
     setChanged(); notifyObservers(theAction); // Notify
   }
 
+  public void doRStock(String productNum, String quantity )
+  {
+    String BackdoorAction = "";
+    theBasket = makeBasket();
+    pn  = productNum.trim();                    // Product no.
+    String pn  = productNum.trim();             // Product no.
+    int amount = 0;
+    try
+    {
+      String aQuantity = quantity.trim();
+      try
+      {
+        amount = Integer.parseInt(aQuantity);   // Convert
+        if ( amount < 0 )
+          throw new NumberFormatException("-ve");
+      }
+      catch ( Exception err)
+      {
+        BackdoorAction = "Invalid quantity";
+        setChanged(); notifyObservers(BackdoorAction);
+        return;
+      }
+
+      if ( theStock.exists( pn ) )              // Stock Exists?
+      {                                         // T
+        theStock.addStock(pn, amount);          //  Re stock
+        Product pr = theStock.getDetails(pn);   //  Get details
+        theBasket.add(pr);                      //
+        BackdoorAction = "";                         // Display
+      } else {                                  // F
+        BackdoorAction =                             //  Inform Unknown
+                "Unknown product number " + pn;       //  product number
+      }
+    } catch( StockException e )
+    {
+      BackdoorAction = e.getMessage();
+    }
+    setChanged(); notifyObservers(BackdoorAction);
+  }
+
   /**
    * ask for update of view callled at start of day
    * or after system reset
@@ -187,6 +227,39 @@ public class CashierModel extends Observable
       }
     }
   }
+
+  public void doClear()
+  {
+    String BackdoorAction = "";
+    theBasket.clear();                        // Clear s. list
+    BackdoorAction = "Enter Product Number";       // Set display
+    setChanged(); notifyObservers(BackdoorAction);
+  }
+  public void doQuery(String productNum )
+  {
+    String BackdoorAction = "";
+    pn  = productNum.trim();                    // Product no.
+    try
+    {                 //  & quantity
+      if ( theStock.exists( pn ) )              // Stock Exists?
+      {                                         // T
+        Product pr = theStock.getDetails( pn ); //  Product
+        BackdoorAction =                             //   Display
+                String.format( "%s : %7.2f (%2d) ",   //
+                        pr.getDescription(),                  //    description
+                        pr.getPrice(),                        //    price
+                        pr.getQuantity() );                   //    quantity
+      } else {                                  //  F
+        BackdoorAction =                             //   Inform
+                "Unknown product number " + pn;       //  product number
+      }
+    } catch( StockException e )
+    {
+      BackdoorAction = e.getMessage();
+    }
+    setChanged(); notifyObservers(BackdoorAction);
+  }
+
 
   /**
    * return an instance of a new Basket

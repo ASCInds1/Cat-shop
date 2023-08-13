@@ -6,6 +6,7 @@ import middle.OrderProcessing;
 import middle.StockReadWriter;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -52,12 +53,9 @@ public class CashierView implements Observer
     } catch (Exception e) {
       System.out.println("Exception: " + e.getMessage());
     }
+    Border thickBlackBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
 
-    // Add comments to indicate color changes
-    UIManager.put("Button.background", new Color(0, 0, 0)); // Black color
-    UIManager.put("Button.foreground", Color.WHITE);
-    UIManager.put("TextField.background", new Color(52, 152, 219)); // Blue color
-    UIManager.put("TextField.foreground", new Color(128, 128, 128)); // Gray color
+
 
     Container cp         = rpc.getContentPane();    // Content Pane
     Container rootWindow = (Container) rpc;         // Root Window
@@ -67,24 +65,43 @@ public class CashierView implements Observer
 
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
+
+    theBtCheck.setBorder(thickBlackBorder);
+    theBtBuy.setBorder(thickBlackBorder);
+    theBtBought.setBorder(thickBlackBorder);
+    theAction.setBorder(thickBlackBorder);
+    theInput.setBorder(thickBlackBorder);
+    theSP.setBorder(thickBlackBorder);
+
+
     theBtCheck.setBounds( 16, 25+60*0, 80, 40 );    // Check Button
+    theBtCheck.setBackground(Color.BLACK); // Set background color to black
+    theBtCheck.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtCheck.setForeground(Color.WHITE); // Set text color to white
     theBtCheck.addActionListener(                   // Call back code
       e -> cont.doCheck( theInput.getText() ) );
     cp.add( theBtCheck );                           //  Add to canvas
 
     theBtBuy.setBounds( 16, 25+60*1, 80, 40 );      // Buy button
+    theBtBuy.setBackground(Color.BLACK); // Set background color to black
+    theBtBuy.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtBuy.setForeground(Color.WHITE); // Set text color to white
     theBtBuy.addActionListener(                     // Call back code
       e -> cont.doBuy() );
     cp.add( theBtBuy );                             //  Add to canvas
 
-    theBtBought.setBounds( 16, 25+60*3, 80, 40 );   // Clear Button
-    theBtBought.addActionListener(                  // Call back code
-      e -> cont.doBought() );
-    cp.add( theBtBought );                          //  Add to canvas
+    theBtBought.setBounds(16, 25 + 60 * 3, 80, 40);  // bought button
+    theBtBought.setBackground(Color.BLACK); // Set background color to black
+    theBtBought.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtBought.setForeground(Color.WHITE); // Set text color to white
+    theBtBought.addActionListener(e -> cont.doBought());
+    cp.add(theBtBought);
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-    theAction.setText( "" );                        // Blank
-    cp.add( theAction );                            //  Add to canvas
+    theAction.setBackground(Color.BLACK); // Set background color to black
+    theAction.setForeground(Color.WHITE); // Set text color to white
+    theAction.setOpaque(true); // Ensure the background color is visible
+    cp.add(theAction); //  Add to canvas
 
     theInput.setBounds( 110, 50, 270, 40 );         // Input Area
     theInput.setText("");                           // Blank

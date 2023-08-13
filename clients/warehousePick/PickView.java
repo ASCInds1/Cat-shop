@@ -5,6 +5,7 @@ import middle.MiddleFactory;
 import middle.OrderProcessing;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -52,17 +53,34 @@ public class PickView implements Observer
     cp.setLayout(null);                             // No layout manager
     rootWindow.setSize( W, H );                     // Size of Window
     rootWindow.setLocation( x, y );
-    
+
+    Border thickBlackBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
+
     Font f = new Font("Monospaced",Font.PLAIN,12);  // Font f is
 
+    theBtPicked.setBorder(thickBlackBorder);
+
+
+    theAction.setBorder(thickBlackBorder);
+
+    theSP.setBorder(thickBlackBorder);
+
+
     theBtPicked.setBounds( 16, 25+60*0, 80, 40 );   // Check Button
+    theBtPicked.setBackground(Color.BLACK); // Set background color to black
+    theBtPicked.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add black border
+    theBtPicked.setForeground(Color.WHITE); // Set text color to white
     theBtPicked.addActionListener(                   // Call back code
       e -> cont.doPick() );
     cp.add( theBtPicked );                          //  Add to canvas
 
-    theAction.setBounds( 110, 25 , 270, 20 );       // Message area
-    theAction.setText( "" );                        // Blank
+    theAction.setBounds( 110, 25 , 270, 20 );// Message area
+    theAction.setBackground(Color.BLACK); // Set background color to black
+    theAction.setForeground(Color.WHITE); // Set text color to white
+    theAction.setOpaque(true); // Ensure the background color is visible
+    theAction.setText( " Please Enter Pick" );                        //  Blank
     cp.add( theAction );                            //  Add to canvas
+    //  Add to canvas
 
     theSP.setBounds( 110, 55, 270, 205 );           // Scrolling pane
     theOutput.setText( "" );                        //  Blank
