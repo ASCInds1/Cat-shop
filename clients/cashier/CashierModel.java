@@ -200,6 +200,21 @@ public class CashierModel extends Observable
     setChanged(); notifyObservers(BackdoorAction);
   }
 
+  public void doRemove()
+  {
+    String theAction = "";
+    int    amount  = 1;
+    theBasket.remove( theProduct );       //  Removes products in basket
+    theAction ="Remove";                    //  reset
+    //
+    theAction = "Next customer";            // New Customer
+    theState = State.process;               // All Done
+    theBasket = null;
+    setChanged(); notifyObservers(theAction); // Notify
+  }
+
+
+
   /**
    * ask for update of view callled at start of day
    * or after system reset
