@@ -1,3 +1,4 @@
+
 package catalogue;
 
 import middle.StockException;
@@ -9,7 +10,6 @@ import static junit.framework.TestCase.assertNotNull;
 
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import middle.StockException;

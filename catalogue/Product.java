@@ -1,6 +1,8 @@
 package catalogue;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 
 /**
  * Used to hold the following information about
@@ -33,30 +35,49 @@ public class Product implements Serializable
     thePrice       = aPrice;          // Price of product
     theQuantity    = aQuantity;       // Quantity involved
   }
-  
+
   public String getProductNum()  { return theProductNum; }
   public String getDescription() { return theDescription; }
   public double getPrice()       { return thePrice; }
   public int    getQuantity()    { return theQuantity; }
-  
+
   public void setProductNum( String aProductNum )
-  { 
+  {
     theProductNum = aProductNum;
   }
-  
+
   public void setDescription( String aDescription )
-  { 
+  {
     theDescription = aDescription;
   }
-  
+
   public void setPrice( double aPrice )
-  { 
+  {
     thePrice = aPrice;
   }
-  
+
   public void setQuantity( int aQuantity )
-  { 
+  {
     theQuantity = aQuantity;
+  }
+
+  /**
+   * Indicates whether some other object is "equal to" this one.
+   * Does not compare the product quantity as this would break the add method in BetterBasket.
+   *
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Product other = (Product) obj;
+    return Objects.equals(theDescription, other.theDescription)
+            && Double.doubleToLongBits(thePrice) == Double.doubleToLongBits(other.thePrice)
+            && Objects.equals(theProductNum, other.theProductNum);
   }
 
 }

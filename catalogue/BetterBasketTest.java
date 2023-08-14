@@ -35,9 +35,9 @@ public class BetterBasketTest {
 
     @Test
     public void testAddMultipleProducts() {
-        Product product1 = new Product("P123", "Product 1", 10.0, 2);
-        Product product2 = new Product("P456", "Product 2", 20.0, 3);
-        Product product3 = new Product("P789", "Product 3", 5.0, 1);
+        Product product1 = new Product("0004", "Product 1", 10.0, 2);
+        Product product2 = new Product("0003", "Product 2", 20.0, 3);
+        Product product3 = new Product("0002", "Product 3", 5.0, 1);
 
         assertTrue(betterBasket.add(product1));
         assertTrue(betterBasket.add(product2));
